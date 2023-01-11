@@ -1,10 +1,8 @@
 const bcrypt = require('bcryptjs')
 const userSchema = require('../../models/user')
-const { TokenAssign } = require('../../middleware/autentication')
-const { Authuser } = require('./authUser')
+const { AuthCheck } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {
-    if (req.file) {
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
         req.body.password = hashPassword;
@@ -36,8 +34,4 @@ module.exports = async function (req, res) {
         } else {
             return res.status(500).send({ message: "Error image is required" })
         }
-    } else {
-        return res.status(500).send({ message: "Image required" })
-    }
-
 }

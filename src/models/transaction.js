@@ -20,15 +20,6 @@ const transactionSchema = mongoose.Schema({
         type:Number,
         required: true
     },
-    ncard:{
-        type:Number
-    },
-    fechaexp:{
-        type:Date
-    },
-    ncvv:{
-        type:Number
-    },
     statusTransaction:{
         type:String
     }

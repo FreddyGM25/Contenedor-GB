@@ -33,6 +33,24 @@ const userSchema = mongoose.Schema({
             type: String,
         }
     },
+    description:{
+        type:String
+    },
+    tiktok:{
+        type:String
+    },
+    facebook:{
+        type:String
+    },
+    instagram:{
+        type:String
+    },
+    titulo:{
+        type:String
+    },
+    profesion:{
+        type:String
+    },
     isActive: {
         type: Boolean
     },

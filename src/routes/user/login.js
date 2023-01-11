@@ -4,7 +4,6 @@ const { TokenAssign } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {
     const password = req.body.password
-    console.log(req.body.email)
     const userExist = await userSchema.findOne({ email: req.body.email })
     if (userExist && userExist.isAdmin == false) {
         const isPasswordMatched = await bcrypt.compare(password, userExist.password)
