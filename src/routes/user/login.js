@@ -4,6 +4,7 @@ const { TokenAssign } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {
     const password = req.body.password
+
     const userExist = await userSchema.findOne({ email: req.body.email })
     if (userExist && userExist.isAdmin == false) {
         const isPasswordMatched = await bcrypt.compare(password, userExist.password)
@@ -32,7 +33,7 @@ module.exports = async function (req, res) {
                 return res.status(200).send({ message: 'Success', name: userExist.name, token: token, isAdmin: true })
             } return res.status(400).send({ message: "Password wrong" })
         }else{
-            return res.status(400).send({ message: "Can't find user" })
+            return res.status(500).send({ message: "Can't find user" })
         }
     }
 }

@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const userSchema = require('../../models/user')
 const { TokenAssign } = require('../../middleware/autentication')
-const { Authuser } = require('./authUser')
 
 module.exports = async function (req, res) {
     if (req.file) {
@@ -11,7 +10,6 @@ module.exports = async function (req, res) {
         const usn = (req.body.username).toLowerCase().replace(/\s+/g, '')
         const ver = await userSchema.findOne({ email: req.body.email })
         if (ver == null) {
-            const ver2 = await Authuser(usn)
             if(ver2 == false) return res.status(500).send({message: "This username exist"})
             const user = new userSchema({
                 name: req.body.name,
