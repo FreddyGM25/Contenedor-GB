@@ -27,7 +27,7 @@ router.post("/:username/orders/:orderID/:idt",upload.none(), require('./transact
 
   //Pagos Card
 router.post("/:username/pay",upload.none(), require('./transaction/OrderCardD'))
-router.post("/:username/success",upload.none(), require('./transaction/OrderCards'))
+router.post("/:username/success",upload.none(), require('./transaction/OrderCardS'))
 
 
 
