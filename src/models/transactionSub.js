@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const transactionSchema = mongoose.Schema({
+const transactionSubSchema = mongoose.Schema({
     isPaypal:{
         type:Boolean
     },
@@ -37,4 +37,4 @@ const transactionSchema = mongoose.Schema({
     
 })
 
-module.exports = mongoose.model('TransactionSub', transactionSchema)
+module.exports = mongoose.model('TransactionSub', transactionSubSchema)

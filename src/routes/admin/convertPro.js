@@ -10,7 +10,6 @@ module.exports = async function (req, res) {
     if (tokenver) {
         const transaction = await transactionSchema.findOne({ email: user.email })
         const date = new Date(Date.now())
-
         if (transaction.statusTransaction == "Complete" && transaction.typeSub == 1) {
             const newdate = addDays(365)
             const result = await userSchema.updateOne({ _id: user._id }, {

@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+require("dotenv").config()
 
 const CLIENT_ID = process.env.CLIENT_ID
 const APP_SECRET = process.env.APP_SECRET

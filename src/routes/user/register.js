@@ -1,41 +1,40 @@
 const bcrypt = require('bcryptjs')
 const userSchema = require('../../models/user')
 const { TokenAssign } = require('../../middleware/autentication')
+const { getTemplate, sendEmail } = require('../../middleware/email')
 
 module.exports = async function (req, res) {
-    if (req.file) {
-        const salt = await bcrypt.genSalt(10);
-        const hashPassword = await bcrypt.hash(req.body.password, salt);
-        req.body.password = hashPassword;
-        const usn = (req.body.username).toLowerCase().replace(/\s+/g, '')
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hashPassword;
+    const usn = await userSchema.findOne({ username: req.body.username })
+    if (usn == null) {
         const ver = await userSchema.findOne({ email: req.body.email })
         if (ver == null) {
-            if(ver2 == false) return res.status(500).send({message: "This username exist"})
             const user = new userSchema({
                 name: req.body.name,
-                username: usn,
+                username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
-                imgpro: {
-                    fileName: req.file.originalname,
-                    filePath: req.file.path,
-                    fileType: req.file.mimetype,
-                    fileSize: req.file.size
-                },
                 accountStatus: false,
                 money: 0.0,
                 isPro: false,
-                isAdmin: false
+                isAdmin: false,
+                isActive: false,
+                createdAt: Date.now()
             });
-            const result = await user.save()
+            await user.save()
             const token = await TokenAssign(user)
+            const template = getTemplate(user.name, token, 1);
+            const resp = await sendEmail(user.email, template, 1);
+            if (resp == false) return res.status(502).send({ message: "error to send email" })
             res.cookie('token', token, { httpOnly: true });
-            return res.status(200).send({ message: "Success", token: token, data: result })
+            return res.status(200).send({ message: "Success" })
         } else {
-            return res.status(500).send({ message: "Error image is required" })
+            return res.status(500).send({ message: "The user exist" })
         }
-    } else {
-        return res.status(500).send({ message: "Image required" })
+    }else{
+        return res.status(400).send({ message: "The username exist" })
     }
 
 }

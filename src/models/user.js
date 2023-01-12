@@ -70,6 +70,10 @@ const userSchema = mongoose.Schema({
     dateF: {
         type: Date
     }
+    ,
+    createdAt:{
+        type: Date
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)
