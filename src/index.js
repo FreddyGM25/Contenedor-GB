@@ -15,6 +15,7 @@ app.use(cors({origins: '*'}));
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
+app.use('/public', express.static(`${__dirname}/src/images/imagesProfile`));
 
 const port = process.env.PORT || 9000
 

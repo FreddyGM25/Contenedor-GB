@@ -1,9 +1,10 @@
 const multer = require('multer')
 const path = require('path')
+require("dotenv").config()
 
 function uploadFile(ruta) {
     var storage = multer.diskStorage({
-        destination: `src/${ruta}`,
+        destination: `src/images/${ruta}`,
         filename: function (req, file, cb) {
             const extension = path.extname(file.originalname)
             cb(null, Date.now() + extension)
@@ -14,4 +15,8 @@ function uploadFile(ruta) {
     return upload
 }
 
-module.exports = {uploadFile}
+function imgUrl (filename){
+    this.imgUrl = `${process.env.URLB}/public/${filename}`
+}
+
+module.exports = {uploadFile, imgUrl}

@@ -25,7 +25,8 @@ module.exports = async function (req, res) {
                 imgpro: {
                     fileName: "",
                     filePath: "",
-                    fileType: ""
+                    fileType: "",
+                    fileSize: ""
                 },
                 description:"",
                 tiktok:"",
