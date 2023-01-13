@@ -8,6 +8,7 @@ module.exports = async function (req, res) {
     if (tokenver) {
         const user = await userSchema.findById(tokenver._id)
         const isPaypal = req.body.isPaypal
+        if(user.monto < req.body.monto) return res.status(501).send({ message: "Error monto insuficiente"})
         if (isPaypal == "false") {
             const transaction = new transactionSchema({
                 name: user.name,

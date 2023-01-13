@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
     const usn = await userSchema.findOne({ username: req.body.username })
     if (usn == null) {
         const ver = await userSchema.findOne({ email: req.body.email })
-        if (ver == null) {
+        if (ver == null || ver.isActive == false) {
             const user = new userSchema({
                 name: req.body.name,
                 username: req.body.username,
@@ -23,9 +23,9 @@ module.exports = async function (req, res) {
                 isActive: false,
                 createdAt: Date.now(),
                 imgpro: {
-                    fileName: "defaultimage",
-                    filePath: "src/serverimg/defaultimage",
-                    fileType: "image/png"
+                    fileName: "",
+                    filePath: "",
+                    fileType: ""
                 },
                 description:"",
                 tiktok:"",

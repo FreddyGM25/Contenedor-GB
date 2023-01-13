@@ -6,10 +6,10 @@ module.exports = async function (req, res) {
   const tokenver = await TokenVerify(token)
   if (tokenver) {
     if (req.body.username && req.body.name && req.body.profesion && req.body.titulo && req.body.description) {
-      const ver = await userSchema.findOne({username: req.body.username})
-      if (ver != null) {
-        return res.status(500).send({ message: "this username exist" })
-      }
+      const ver = await userSchema.findOne({ username: req.body.username })
+        if (ver != null) {
+          if(ver.username != req.body.username) return res.status(500).send({ message: "this username exist" })
+        }
       const result = await userSchema.updateOne({ _id: tokenver._id }, {
         $set: {
           username: req.body.username,

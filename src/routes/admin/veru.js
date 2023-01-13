@@ -7,7 +7,8 @@ module.exports = async function (req, res) {
     if (tokenver) {
         const admin = await userSchema.findById(tokenver._id)
         if(admin.isAdmin == true) {
-            return userSchema.find()
+            console.log("ya retorne")
+            return await userSchema.find()
             .then((data) => res.json(data))
             .catch((error) => res.json({ message: error }));
         }else{

@@ -10,6 +10,7 @@ router.get('/admin/seeu', require('./admin/veru'))
 router.get('/user/valid', upload.none(), require('./user/activeUser'))
 router.get('/user/data/:username', require('./user/dataUserP'))
 router.get('/profile/data', require('./user/dataUserPr'))
+router.get('/user/message/:id', require('./message/verOneM'))
 
 
 //metodos POST
@@ -22,8 +23,7 @@ router.post('/user/versionPRO', upload.none(), require('./transaction/transactio
 router.post('/user/reset', upload.none(), require('./user/sendreset'))
 router.post('/user/reset/:token', upload.none(),require('./user/resetchange'))
 router.post('/message', uploadFile('images').single('img'), require('./message/CreateMessage'))
-router.post('/user/editinfo', upload.none(),require('./user/editInfo'))
-router.post('/user/editsn', upload.none(),require('./user/editSN'))
+
 
   //Admin
 router.post('/admin/register', upload.none(), require('./admin/register'))
@@ -41,6 +41,8 @@ router.post("/:username/success",upload.none(), require('./transaction/OrderCard
 
 //metodo PUT
 router.put('/user/logout', require('./user/logout'))
+router.put('/user/editinfo', upload.none(),require('./user/editInfo'))
+router.put('/user/editsn', upload.none(),require('./user/editSN'))
 
 //metodos DELETE
 router.delete('/admin/deleteu/:email', upload.none(),require('./admin/deleteu'))
