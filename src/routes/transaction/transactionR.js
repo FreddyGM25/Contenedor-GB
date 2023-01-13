@@ -7,41 +7,19 @@ module.exports = async function (req, res) {
     const tokenver = await TokenVerify(token)
     if (tokenver) {
         const user = await userSchema.findById(tokenver._id)
-        const isPaypal = req.body.isPaypal
-        if(user.monto < req.body.monto) return res.status(501).send({ message: "Error monto insuficiente"})
-        if (isPaypal == "false") {
-            const transaction = new transactionSchema({
-                name: user.name,
-                email: user.email,
-                monto: req.body.monto,
-                ncard: req.body.ncard,
-                isPaypal: false
-            })
-            const result = await transaction.save()
-            await userSchema.updateOne({ _id: user._id }, {
-                $set: {
-                    monto: user.monto - req.body.monto
-                }
-            })
-            return res.status(200).send({ message: "Success", data: result })
-        }
-        if (isPaypal == "true") {
-            const transaction = new transactionSchema({
-                name: user.name,
-                email: user.email,
-                monto: req.body.monto,
-                ncard: req.body.ncard,
-                isPaypal: true
-            })
-            const result = await transaction.save()
-            await userSchema.updateOne({ _id: user._id }, {
-                $set: {
-                    monto: user.monto - req.body.monto
-                }
-            })
-            return res.status(200).send({ message: "Success", data: result })
-        }
-        return res.status(500).send({ message: "Error request" })
+        if (user.money < req.body.money) return res.status(501).send({ message: "Error monto insuficiente" })
+        const transaction = new transactionSchema({
+            name: user.name,
+            email: req.body.email,
+            monto: req.body.monto
+        })
+        const result = await transaction.save()
+        await userSchema.updateOne({ _id: user._id }, {
+            $set: {
+                money: user.money - req.body.money
+            }
+        })
+        return res.status(200).send({ message: "Success", data: result })
     } else {
         return { message: "this operation need autentication" }
     }

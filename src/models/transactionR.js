@@ -1,10 +1,7 @@
 const mongoose = require("mongoose")
 
 const transactionSchema = mongoose.Schema({
-    isPaypal:{
-        type:Boolean,
-        required:true
-    },
+
     name:{
         type:String
     },
@@ -14,10 +11,6 @@ const transactionSchema = mongoose.Schema({
     monto:{
         type:Number,
         required: true
-    },
-    ncard:{
-        type:Number,
-        required: true,
     }
     
 })

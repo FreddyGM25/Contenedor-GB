@@ -2,26 +2,18 @@ const mongoose = require("mongoose")
 const number = require("mongoose/lib/cast/number")
 
 const messageSchema = mongoose.Schema({
-    
-    emailUser:{
-        type:String,
+
+    email: {
+        type: String,
         required: true
     },
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    title:{
-        type:String,
-        required:true
-    },
-    description:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
     img: {
         fileName: {
@@ -36,11 +28,8 @@ const messageSchema = mongoose.Schema({
         fileSize: {
             type: String,
         }
-    },
-    monto:{
-        type:Number
     }
-    
+
 })
 
 module.exports = mongoose.model('Message', messageSchema)

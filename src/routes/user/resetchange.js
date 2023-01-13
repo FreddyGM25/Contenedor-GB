@@ -15,11 +15,11 @@ module.exports = async function (req, res) {
                     password: req.body.password
                 }
             })
-            return res.status(200).send({ message: "Success", data: result })
+            return res.status(200).send({ response: "Success", message: "Success" })
         }else{
-            res.status(400).send({message: "Passwords do not match"})
+            res.status(200).send({response: "Error", message: "Passwords do not match"})
         }
     }else{
-        res.status(500).send({message: "this operation need autentication"})
+        res.status(200).send({response: "Error", message: "this operation need autentication"})
     }
 }

@@ -12,12 +12,12 @@ module.exports = async function Authuser(req, res) {
                   isActive: true
                 }
               })
-            return res.status(200).send({ message: "Success", data: result })
+            return res.status(200).send({ response: "Success", message: "Success"})
         } else {
-            return res.status(500).send({ message: "This account is active" })
+            return res.status(200).send({response: "Error", message: "Esta cuenta esta activada" })
         }
 
     } else {
-        return { message: "this operation need autentication" }
+        return { message: "Esta operacion requiere autenticacion" }
     }
 }

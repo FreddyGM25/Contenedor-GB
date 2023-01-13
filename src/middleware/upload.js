@@ -8,7 +8,10 @@ function uploadFile(ruta) {
         filename: function (req, file, cb) {
             const extension = path.extname(file.originalname)
             cb(null, Date.now() + extension)
-        }
+        },
+        limits: {
+            fieldSize: 1000000,
+        },
     })
 
     const upload = multer({ storage: storage })

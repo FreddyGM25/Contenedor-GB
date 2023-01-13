@@ -1,10 +1,12 @@
 const transactionSchema = require('../../models/transaction')
+const userSchema = require('../../models/user')
 require("dotenv").config()
 const paypal = require("../../middleware/paypal-api")
 
 
 module.exports = async function (req, res) {
     const amount = req.body.amount
+    const user = await userSchema.findOne({username:req.params.username}) 
     try {
             const transaction = new transactionSchema({
                 name: req.body.name,
@@ -12,7 +14,7 @@ module.exports = async function (req, res) {
                 monto: req.body.monto,
                 statusTransaction: "Pending",
                 isPaypal: true,
-                nameUser: req.params.username
+                emailUser: user.email
             })
             await transaction.save()
             const order = await paypal.createOrder(amount)

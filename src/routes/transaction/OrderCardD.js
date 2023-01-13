@@ -1,15 +1,17 @@
 require("dotenv").config()
 const stripe = require('stripe')(process.env.KEYSTRIPE)
 const transactionSchema = require('../../models/transaction')
+const userSchema = require('../../models/user')
 
 module.exports = async function (req, res) {
+    const user = await userSchema.findOne({username:req.params.username}) 
     const transaction = new transactionSchema({
         name: req.body.name,
         email: req.body.email,
         monto: req.body.monto,
         statusTransaction: "Pending",
         isPaypal: false,
-        nameUser: req.params.username
+        emailUser: user.email
     })
     await transaction.save()
     const session = await stripe.checkout.sessions.create({

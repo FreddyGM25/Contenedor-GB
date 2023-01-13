@@ -185,7 +185,7 @@ const getTemplate = (name, token, resp) => {
           </p>
           <br />
           <a
-            href="${process.env.URLR}/${token}"
+            href="${process.env.URLR}?token=${token}"
             style="color: blue; text-decoration: none; font-size: 24px"
             >Haz click aquí</a
           >

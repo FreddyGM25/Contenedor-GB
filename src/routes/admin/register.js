@@ -10,8 +10,9 @@ module.exports = async function (req, res) {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            isAdmin:true
+            isAdmin:true,
+            createdAt: Date.now()
         });
         const result = await user.save()
-        return res.status(200).send({message: "Success", data:result})
+        return res.status(200).send({response: "Success", message: "Success"})
 }

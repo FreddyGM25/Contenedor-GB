@@ -23,10 +23,9 @@ module.exports = async function (req, res) {
                 isActive: false,
                 createdAt: Date.now(),
                 imgpro: {
-                    fileName: "",
-                    filePath: "",
-                    fileType: "",
-                    fileSize: ""
+                    fileName: "defaultimage.png",
+                    filePath: `http://25.78.142.190:9000/serverimg/defaultimage.png`,
+                    fileType: "image/png"
                 },
                 description:"",
                 tiktok:"",
@@ -40,14 +39,14 @@ module.exports = async function (req, res) {
             const token = await TokenAssign(user)
             const template = getTemplate(user.name, token, 1);
             const resp = await sendEmail(user.email, template, 1);
-            if (resp == false) return res.status(502).send({ message: "error to send email" })
+            if (resp == false) return res.status(200).send({ response: "Error", message: "Error al enviar el email" })
             res.cookie('token', token, { httpOnly: true });
-            return res.status(200).send({ message: "Success" })
+            return res.status(200).send({ response: "Success", message: "Success" })
         } else {
-            return res.status(500).send({ message: "The user exist" })
+            return res.status(200).send({ response: "Error", message: "El usuario ya existe" })
         }
     }else{
-        return res.status(400).send({ message: "The username exist" })
+        return res.status(200).send({response: "Error", message: "El usuario ya existe" })
     }
 
 }

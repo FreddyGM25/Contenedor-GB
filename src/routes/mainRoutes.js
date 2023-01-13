@@ -11,18 +11,19 @@ router.get('/user/valid', upload.none(), require('./user/activeUser'))
 router.get('/user/data/:username', require('./user/dataUserP'))
 router.get('/profile/data', require('./user/dataUserPr'))
 router.get('/user/message/:id', require('./message/verOneM'))
+router.get('/admin/message', require('./message/verOneM'))
 
 
 //metodos POST
 
   //User
-router.post('/user/register', uploadFile('imagesProfile').single('imgpro'), require('./user/register'))
+router.post('/user/register', uploadFile('imagesprofile').single('imgpro'), require('./user/register'))
 router.post('/user/verify', upload.none(), require('./user/authUser'))
 router.post('/user/login', upload.none(),require('./user/login'))
 router.post('/user/versionPRO', upload.none(), require('./transaction/transactionSub'))
 router.post('/user/reset', upload.none(), require('./user/sendreset'))
-router.post('/user/reset/:token', upload.none(),require('./user/resetchange'))
-router.post('/message', uploadFile('images').single('img'), require('./message/CreateMessage'))
+router.post('/message', uploadFile('img').single('img'), require('./message/CreateMessage'))
+router.post('/withdraw', upload.none(), require('./transaction/transactionR'))
 
 
   //Admin
@@ -41,8 +42,11 @@ router.post("/:username/success",upload.none(), require('./transaction/OrderCard
 
 //metodo PUT
 router.put('/user/logout', require('./user/logout'))
+router.put('/user/reset', upload.none(),require('./user/resetchange'))
+router.put('/user/passwordChange', upload.none(),require('./user/reset'))
 router.put('/user/editinfo', upload.none(),require('./user/editInfo'))
 router.put('/user/editsn', upload.none(),require('./user/editSN'))
+router.put('/user/editp', uploadFile('imagesprofile').single('imgpro'),require('./user/editIm'))
 
 //metodos DELETE
 router.delete('/admin/deleteu/:email', upload.none(),require('./admin/deleteu'))

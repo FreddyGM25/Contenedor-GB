@@ -7,11 +7,11 @@ module.exports = async function (req, res) {
     const tokenver = await TokenVerify(token)
     if (tokenver) {
         const user = await userSchema.findById(tokenver._id)
-        if(user == null) return res.status(501).send({ message: "The username no exist"})
-        const message = await SeeM(user.username)
-        return res.status(200).send({ user: user, message: message })
+        if(user == null) return res.status(501).send({response: "Error", message: "Este nombre de usuario no existe"})
+        const message = await SeeM(user.email)
+        return res.status(200).send({response: "Success", user: user, message: message })
     }else{
-        return res.status(500).send({ message: "Error need autentication"})
+        return res.status(200).send({response: "Error", error: "Se requiere autenticacion"})
     }
 
 }

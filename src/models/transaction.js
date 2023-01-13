@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const transactionSchema = mongoose.Schema({
-    nameUser:{
+    emailUser:{
         type:String,
         required:true
     },

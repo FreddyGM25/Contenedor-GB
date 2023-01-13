@@ -17,7 +17,7 @@ module.exports = async function (req, res) {
       }
     })
     const findUser = await transactionSchema.findOne({ _id: idt})
-    const user = await userSchema.findOne({ username: findUser.nameUser})
+    const user = await userSchema.findOne({ username: findUser.emailUser})
     await userSchema.updateOne({ _id:  idt}, {
       $set: {
         monto: user.monto + findUser.monto
