@@ -21,7 +21,19 @@ module.exports = async function (req, res) {
                 isPro: false,
                 isAdmin: false,
                 isActive: false,
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                imgpro: {
+                    fileName: "defaultimage",
+                    filePath: "src/serverimg/defaultimage",
+                    fileType: "image/png"
+                },
+                description:"",
+                tiktok:"",
+                facebook:"",
+                instagram:"",
+                titulo:"",
+                profesion:""
+
             });
             await user.save()
             const token = await TokenAssign(user)

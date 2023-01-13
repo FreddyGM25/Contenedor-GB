@@ -1,4 +1,8 @@
 const userSchema = require('../../models/user')
+const transactionSchema = require('../../models/transaction')
+const transactionRSchema = require('../../models/transactionR')
+const transactionSubSchema = require('../../models/transactionSub')
+
 const { TokenVerify } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {

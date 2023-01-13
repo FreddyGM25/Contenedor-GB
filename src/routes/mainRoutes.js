@@ -8,6 +8,8 @@ const upload = multer()
 router.get('/:username', require('./message/verm'))
 router.get('/admin/seeu', require('./admin/veru'))
 router.get('/user/valid', upload.none(), require('./user/activeUser'))
+router.get('/user/data/:username', require('./user/dataUserP'))
+router.get('/profile/data', require('./user/dataUserPr'))
 
 
 //metodos POST
@@ -20,6 +22,8 @@ router.post('/user/versionPRO', upload.none(), require('./transaction/transactio
 router.post('/user/reset', upload.none(), require('./user/sendreset'))
 router.post('/user/reset/:token', upload.none(),require('./user/resetchange'))
 router.post('/message', uploadFile('images').single('img'), require('./message/CreateMessage'))
+router.post('/user/editinfo', upload.none(),require('./user/editInfo'))
+router.post('/user/editsn', upload.none(),require('./user/editSN'))
 
   //Admin
 router.post('/admin/register', upload.none(), require('./admin/register'))
