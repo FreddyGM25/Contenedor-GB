@@ -23,7 +23,7 @@ module.exports = async function (req, res) {
                         acerca: req.body.acerca,
                         aviso: req.body.aviso,
                         reglas: req.body.reglas,
-                        comisiones: req.body.comisiones
+                        comision: req.body.comision
                     }
                 })
             }

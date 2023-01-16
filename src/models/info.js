@@ -17,7 +17,7 @@ const infoSchema = mongoose.Schema({
     reglas: {
         type: String
     },
-    comisiones: {
+    comision: {
         type: String
     }
 

@@ -61,7 +61,7 @@ router.put('/user/editsn', upload.none(), require('./user/editSN'))
 router.put('/user/editp', uploadFile('imagesprofile').single('imgpro'), require('./user/editIm'))
 router.put('/admin/pay', upload.none(),require('./admin/pay'))
 router.put('/admin/price', upload.none(),require('./admin/infoprice'))
-router.put('/admin/info', upload.none(),require('./admin/infoprice'))
+router.put('/admin/info', upload.none(),require('./admin/info'))
 
 //metodos DELETE
 router.delete('/admin/deleteu/:email', upload.none(), require('./admin/deleteu'))

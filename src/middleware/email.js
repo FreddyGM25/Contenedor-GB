@@ -24,6 +24,11 @@ const sendEmail = async (email, html, rep, asunto) => {
         subject: "Activate Account", // Subject line
         text: "Link active account", // plain text body
         html, // html body
+        attachments: [{
+          filename: 'logogratitud.png',
+          path: `${process.env.URLB}/serverimg/logogratitud.png`,
+          cid: 'logo' //my mistake was putting "cid:logo@cid" here! 
+     }],
       });
 
       console.log("Email enviado correctamente")
@@ -41,6 +46,11 @@ const sendEmail = async (email, html, rep, asunto) => {
         subject: "Reset password", // Subject line
         text: "Link reset account", // plain text body
         html, // html body
+        attachments: [{
+          filename: 'logogratitud.png',
+          path: `${process.env.URLB}/serverimg/logogratitud.png`,
+          cid: 'logo' //my mistake was putting "cid:logo@cid" here! 
+        }],
       });
 
       console.log("Email enviado correctamente")
@@ -56,7 +66,12 @@ const sendEmail = async (email, html, rep, asunto) => {
         from: `GRATITUD <${mail.user}>`, // sender address
         to: email, // list of receivers
         subject: asunto, // Subject line // plain text body
-        html: html // html body
+        html: html, // html body
+        attachments: [{
+          filename: 'logogratitud.png',
+          path: `${process.env.URLB}/serverimg/logogratitud.png`,
+          cid: 'logo' //my mistake was putting "cid:logo@cid" here! 
+        }],
       });
 
       console.log("Email enviado correctamente")
@@ -68,7 +83,7 @@ const sendEmail = async (email, html, rep, asunto) => {
   }
 }
 
-const getTemplate = (name, token, URL, text,resp) => {
+const getTemplate = (name, token, URL, text, resp) => {
 
   if (resp == 1) {
     return `
@@ -152,8 +167,8 @@ const getTemplate = (name, token, URL, text,resp) => {
         </div>
       </div>
     </body>`;
-  } 
-  if(resp == 2){
+  }
+  if (resp == 2) {
     return `
     <html lang="en">
     <head>
@@ -235,7 +250,7 @@ const getTemplate = (name, token, URL, text,resp) => {
       </div>
     </body>`;
   }
-  if(resp == 3){
+  if (resp == 3) {
     return `<html lang="en">
     <head>
       <meta charset="UTF-8" />
@@ -284,7 +299,7 @@ const getTemplate = (name, token, URL, text,resp) => {
     <body>
       <div class="container">
         <div style="display: flex; justify-content: center">
-          <img src="./Images/logo gratitud.png" alt="" />
+          <img src="cid:logo" alt="" />
         </div>
         <br />
         <br>
