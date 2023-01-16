@@ -3,7 +3,7 @@ const userSchema = require('../../models/user')
 const { TokenVerify } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {
-    const token = req.params.token.split(' ').pop()
+    const token = req.query.token.split(' ').pop()
     const tokenver = await TokenVerify(token)
     if (tokenver) {
         if (req.body.password == req.body.password2) {
@@ -15,11 +15,11 @@ module.exports = async function (req, res) {
                     password: req.body.password
                 }
             })
-            return res.status(200).send({ response: "Success", message: "Success" })
+            return res.status(200).send({ response: "Success", message: "Contraseña cambiada correctamente" })
         }else{
-            res.status(200).send({response: "Error", message: "Passwords do not match"})
+            res.status(200).send({response: "Error", message: "Las contraseñas no coinciden"})
         }
     }else{
-        res.status(200).send({response: "Error", message: "this operation need autentication"})
+        res.status(200).send({response: "Error", message: "Esta operacion necesita autenticacion"})
     }
 }

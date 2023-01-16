@@ -11,6 +11,15 @@ const transactionSchema = mongoose.Schema({
     monto:{
         type:Number,
         required: true
+    },
+    createdAt:{
+        type: Date
+    },
+    statusTransaction:{
+        type:String
+    },
+    emailUser:{
+        type:String
     }
     
 })

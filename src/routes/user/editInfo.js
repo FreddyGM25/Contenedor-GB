@@ -19,7 +19,7 @@ module.exports = async function (req, res) {
           description: req.body.description
         }
       })
-      return res.status(200).send({ response: "Success", message: "Success" })
+      return res.status(200).send({ response: "Success", message: "Cambios guardados" })
     }
     return res.status(200).send({ response: "Error", message: "Se requiere todos los campos" })
   } else {

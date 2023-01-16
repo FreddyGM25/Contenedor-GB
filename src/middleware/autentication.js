@@ -2,13 +2,13 @@ const jwt = require('jsonwebtoken')
 
 //Generar token 
 async function TokenAssign(user) {
-    return jwt.sign({ _id: user._id }, 'only4bet', { expiresIn: '10h' })
+    return jwt.sign({ _id: user._id }, 'GRATITUD', { expiresIn: '10h' })
 }
 
 // Verificar el token
 async function TokenVerify(token) {
     try {
-        return jwt.verify(token, 'only4bet')
+        return jwt.verify(token, 'GRATITUD')
     } catch (e) {
         return null
     }
@@ -29,13 +29,13 @@ async function AuthCheck(req, res, next) {
     }
 }
 
-async function TokenRemove(req, res, next) {
-    const authHeader = req.headers.authorization.split(' ').pop()
+async function TokenRemove(token) {
+    const authHeader = token
     jwt.sign(authHeader, "", { expiresIn: '1s' }, (logout, err) => {
         if (logout) {
-            res.status(200).send({ message: "Has sido desconectado" })
+            return true
         } else {
-            res.status(500).send({ message: 'Error' })
+            return false
         }
     })
 }

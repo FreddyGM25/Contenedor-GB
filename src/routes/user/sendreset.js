@@ -10,7 +10,8 @@ module.exports = async function (req, res) {
         const template = getTemplate(user.name, token, 2);
         const resp = await sendEmail(user.email, template, 2);
         if(resp == false) return res.status(200).send({response: "Error", message: "Error al enviar el email"})
-        return res.status(200).send({response: "Success", message: "Success"})
+        console.log(token)
+        return res.status(200).send({response: "Success", message: "Contraseña enviada correctamente"})
     } else {
         return res.status(200).send({response: "Error", message: "El usuario no existe" })
     }

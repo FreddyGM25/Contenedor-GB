@@ -22,6 +22,9 @@ const transactionSchema = mongoose.Schema({
     },
     statusTransaction:{
         type:String
+    },
+    createdAt:{
+        type: Date
     }
     
 })

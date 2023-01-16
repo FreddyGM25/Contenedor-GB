@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/serverimg',express.static('src/images/serverimg'));
 app.use('/images',express.static('src/images/img'));
 app.use('/imagesprofile',express.static('src/images/imagesprofile'));
+app.use('/file',express.static('src/images/files'));
 
 const port = process.env.PORT || 9000
 

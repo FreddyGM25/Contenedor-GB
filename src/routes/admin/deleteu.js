@@ -11,7 +11,7 @@ module.exports = async function (req, res) {
         const tokenver = await TokenVerify(token)
         const admin = await userSchema.findById(tokenver._id)
         if (admin.isAdmin == true) {
-            const result = await userSchema.remove({ email: req.params.email })
+            await userSchema.remove({ email: req.params.email })
             return res.status(200).send({ response: "Success", message: "Success"})
         } else {
             return res.status(200).send({ response: "Error", message: "Este es un usuario normal" })

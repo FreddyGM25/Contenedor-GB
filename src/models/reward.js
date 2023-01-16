@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
-const number = require("mongoose/lib/cast/number")
 
-const messageSchema = mongoose.Schema({
+const rewardSchema = mongoose.Schema({
 
     email: {
         type: String,
@@ -15,7 +14,7 @@ const messageSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    img: {
+    file: {
         fileName: {
             type: String,
         },
@@ -32,4 +31,4 @@ const messageSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Message', messageSchema)
+module.exports = mongoose.model('Reward', rewardSchema)

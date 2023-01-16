@@ -24,7 +24,7 @@ module.exports = async function (req, res) {
                 createdAt: Date.now(),
                 imgpro: {
                     fileName: "defaultimage.png",
-                    filePath: `http://25.78.142.190:9000/serverimg/defaultimage.png`,
+                    filePath: `${process.env.URLB}/serverimg/defaultimage.png`,
                     fileType: "image/png"
                 },
                 description:"",
@@ -41,7 +41,7 @@ module.exports = async function (req, res) {
             const resp = await sendEmail(user.email, template, 1);
             if (resp == false) return res.status(200).send({ response: "Error", message: "Error al enviar el email" })
             res.cookie('token', token, { httpOnly: true });
-            return res.status(200).send({ response: "Success", message: "Success" })
+            return res.status(200).send({ response: "Success", message: "Usuario creado correctamente" })
         } else {
             return res.status(200).send({ response: "Error", message: "El usuario ya existe" })
         }

@@ -12,7 +12,7 @@ module.exports = async function (req, res) {
         instagram: req.body.instagram,
       }
     })
-    return res.status(200).send({ response: "Success", message: "Success"})
+    return res.status(200).send({ response: "Success", message: "Cambios guardados"})
   } else {
     return res.status(200).send({ response: "Error", message: "Esta operacion requiere autenticacion" })
   }

@@ -6,5 +6,5 @@ module.exports = async function Authuser(req, res) {
     if(user != null && user.isActive == true){
         return res.status(500).send({response: "Error", message: "Este nombre de usuario ya existe"})
     }
-    return res.status(200).send({response: "Success", message: "Success"})
+    return res.status(200).send({response: "Success", message: "Este nombre esta disponible"})
 }

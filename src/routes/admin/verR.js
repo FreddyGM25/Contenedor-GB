@@ -9,8 +9,8 @@ module.exports = async function (req, res) {
         const admin = await userSchema.findById(tokenver._id)
         if(admin.isAdmin == true) {
             return transactionRSchema.find()
-            .then((data) => res.status(200).json(data))
-            .catch((error) => res.json({ message: error }));
+            .then((data) =>  res.status(200).send({response:"Success", data1:data}))
+            .catch((error) =>  res.status(200).send({response:"Error", message:error}));
         }else{
             return res.status(200).send({response: "Error", message: "Este es un usuario normal"})
         }  
