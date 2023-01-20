@@ -294,7 +294,7 @@ const getTemplate = (name, token, URL, text, resp) => {
           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div>
-        <a hrf="${process.env.URLA}?token=${token}">Haz click aquí<a/>
+        <a href="${process.env.URLA}?token=${token}">Haz click aquí<a/>
       </div>
     
           </td>
@@ -322,7 +322,7 @@ const getTemplate = (name, token, URL, text, resp) => {
           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div>
-        <a>${process.env.URLA}?token=${token}<a/>
+        <a href="${process.env.URLA}?token=${token}">${process.env.URLA}?token=${token}<a/>
       </div>
     
           </td>
@@ -739,7 +739,7 @@ const getTemplate = (name, token, URL, text, resp) => {
           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div>
-        <a hrf="${process.env.URLR}?token=${token}">Haz click aquí<a/>
+        <a href="${process.env.URLR}?token=${token}">Haz click aquí<a/>
       </div>
     
           </td>
@@ -767,7 +767,7 @@ const getTemplate = (name, token, URL, text, resp) => {
           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
             
       <div>
-        <a>${process.env.URLR}?token=${token}<a/>
+        <a href="${process.env.URLR}?token=${token}">${process.env.URLR}?token=${token}<a/>
       </div>
     
           </td>

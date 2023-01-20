@@ -5,8 +5,8 @@ const paypal = require("../../middleware/paypal-api")
 
 
 module.exports = async function (req, res) {
-  const orderID = req.params.orderID;
-  const idt = req.params.idt
+  const orderID = req.body.orderID;
+  const idt = req.body.idt
   try {
     const captureData = await paypal.capturePayment(orderID);
     console.log("Esta hecho")

@@ -41,8 +41,8 @@ router.post('/admin/convertPRO', upload.none(), require('./admin/convertPro'))
 router.post('/admin/boletin', upload.none(), require('./admin/boletin'))
 
 //Pagos PayPal
-router.post("/:username/orders", upload.none(), require('./transaction/OrderPaypalD'))
-router.post("/:username/orders/:orderID/:idt", upload.none(), require('./transaction/OrderPaypalS'))
+router.post("/orders", require('./transaction/OrderPaypalD'))
+router.post("/orders/:orderID", require('./transaction/OrderPaypalS'))
 
 //Pagos Card
 router.post("/:username/pay", upload.none(), require('./transaction/OrderCardD'))
