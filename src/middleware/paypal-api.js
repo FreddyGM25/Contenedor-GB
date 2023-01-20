@@ -45,6 +45,18 @@ async function capturePayment(orderId) {
   return handleResponse(response);
 }
 
+async function captureSuscription(orderId){
+  const accessToken = await generateAccessToken();
+  const url = `${base}/v1/billing/plans/${orderId}/activate`;
+  const response = await fetch(url, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
 async function generateAccessToken() {
   const auth = Buffer.from(CLIENT_ID + ":" + APP_SECRET).toString("base64");
   const response = await fetch(`${base}/v1/oauth2/token`, {
@@ -68,4 +80,4 @@ async function handleResponse(response) {
   throw new Error(errorMessage);
 }
 
-module.exports = { createOrder, capturePayment }
+module.exports = { createOrder, capturePayment, captureSuscription }

@@ -22,7 +22,7 @@ module.exports = async function (req, res) {
             if (isPasswordMatched) {
                 const token = await TokenAssign(userExist)
                 res.cookie('token', token, { httpOnly: true });
-                return res.status(200).send({ message: 'Success', name: userExist.name, token: token, isAdmin: true })
+                return res.status(200).send({ response: 'Success', name: userExist.name, token: token, isAdmin: true })
             } return res.status(200).send({response: "Error", message: "Contraseña incorrecta" })
         }else{
             return res.status(200).send({response: "Error", message: "No se pudo encontrar el usuario" })

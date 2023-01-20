@@ -5,7 +5,7 @@ const paypal = require("../../middleware/paypal-api")
 
 
 module.exports = async function (req, res) {
-    const amount = req.body.amount
+    const amount = req.body.monto
     const user = await userSchema.findOne({username:req.params.username}) 
     try {
             const transaction = new transactionSchema({

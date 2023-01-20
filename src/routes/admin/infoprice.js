@@ -14,7 +14,7 @@ module.exports = async function (req, res) {
                     year: req.body.year,
                     month: req.body.month
                 })
-                price.save()
+                await price.save()
             } else {
                 await infoSchema.updateOne({ _id: ver._id }, {
                     $set: {
@@ -23,7 +23,7 @@ module.exports = async function (req, res) {
                     }
                 })
             }
-            return res.status(200).send({ response: "Success", message: "Success" })
+            return res.status(200).send({ response: "Success", message: "Cambios guardados exitosamente" })
         } else {
             return res.status(200).send({ response: "Error", message: "Este es un usuario normal" })
         }

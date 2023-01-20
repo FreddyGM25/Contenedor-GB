@@ -38,7 +38,7 @@ router.post('/withdraw', upload.none(), require('./transaction/transactionR'))
 //Admin
 router.post('/admin/register', upload.none(), require('./admin/register'))
 router.post('/admin/convertPRO', upload.none(), require('./admin/convertPro'))
-router.post('/boletin', upload.none(), require('./admin/boletin'))
+router.post('/admin/boletin', upload.none(), require('./admin/boletin'))
 
 //Pagos PayPal
 router.post("/:username/orders", upload.none(), require('./transaction/OrderPaypalD'))

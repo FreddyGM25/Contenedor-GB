@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
     const usn = await userSchema.findOne({ username: req.body.username })
     if (usn == null) {
         const ver = await userSchema.findOne({ email: req.body.email })
-        if (ver == null || ver.isActive == false) {
+        if (ver == null) {
             const user = new userSchema({
                 name: req.body.name,
                 username: req.body.username,
@@ -37,8 +37,8 @@ module.exports = async function (req, res) {
             });
             await user.save()
             const token = await TokenAssign(user)
-            const template = getTemplate(user.name, token, 1);
-            const resp = await sendEmail(user.email, template, 1);
+            const template = getTemplate(user.name, token, "", "", 1);
+            const resp = await sendEmail(user.email, template, 1, "");
             if (resp == false) return res.status(200).send({ response: "Error", message: "Error al enviar el email" })
             res.cookie('token', token, { httpOnly: true });
             return res.status(200).send({ response: "Success", message: "Usuario creado correctamente" })

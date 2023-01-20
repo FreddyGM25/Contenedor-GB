@@ -20,7 +20,7 @@ module.exports = async function (req, res) {
                     sendEmail(users[user].email, template, 3, req.body.asunto);
                 }
             }
-            return res.status(200).send({ response: "Success", message: "Success" })
+            return res.status(200).send({ response: "Success", message: "Correo enviado correctamente" })
         } else {
             return res.status(200).send({ response: "Error", message: "Este es un usuario normal" })
         }

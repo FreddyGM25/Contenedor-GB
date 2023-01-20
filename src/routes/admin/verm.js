@@ -7,14 +7,17 @@ module.exports = async function (req, res) {
     if (token != "null") {
         const tokenver = await TokenVerify(token)
         const admin = await userSchema.findById(tokenver._id)
-        if(admin.isAdmin == true) {
-            return messageSchema.find()
-            .then((data) => res.status(200).send({response: "Success", message: data}))
-            .catch((error) => res.status(200).send({response: "Error", message: error}));
-        }else{
-            return res.status(200).send({response: "Error", message: "Este es un usuario normal"})
-        }  
+        if (admin.isAdmin == true) {
+            let result = await messageSchema.find()
+            result = result.filter((valorActual, indiceActual, arreglo) => {
+                //Podríamos omitir el return y hacerlo en una línea, pero se vería menos legible
+                return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.email) === JSON.stringify(valorActual.email)) === indiceActual
+            });
+            return res.status(200).send({ response: "Success", message: result })
+        } else {
+            return res.status(200).send({ response: "Error", message: "Este es un usuario normal" })
+        }
     } else {
-        return res.status(200).send({response: "Error", message: "Esta operacion requiere autenticacion" })
+        return res.status(200).send({ response: "Error", message: "Esta operacion requiere autenticacion" })
     }
 }
