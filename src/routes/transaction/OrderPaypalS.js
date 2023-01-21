@@ -5,31 +5,27 @@ const paypal = require("../../middleware/paypal-api")
 
 
 module.exports = async function (req, res) {
-  const orderID = req.body.orderID;
-  const idt = req.body.idt
+  const { orderID } = req.params;
+  const user = await userSchema.findOne({username: req.body.username})
   try {
     const captureData = await paypal.capturePayment(orderID);
-    console.log("Esta hecho")
-    res.json(captureData);
-    await transactionSchema.updateOne({ _id:  idt}, {
+    const transaction = new transactionSchema({
+      name: req.body.name,
+      email: req.body.email,
+      monto: req.body.amount,
+      statusTransaction: "Complete",
+      isPaypal: true,
+      emailUser: user.email
+    })
+    await transaction.save()
+    console.log(user.money + transaction.monto)
+    await userSchema.updateOne({ _id: user._id }, {
       $set: {
-        statusTransaction: "Complete"
+        money: user.money + transaction.monto
       }
     })
-    const findUser = await transactionSchema.findOne({ _id: idt})
-    const user = await userSchema.findOne({ username: findUser.emailUser})
-    await userSchema.updateOne({ _id:  idt}, {
-      $set: {
-        monto: user.monto + findUser.monto
-      }
-    })
+    return res.json(captureData);
   } catch (err) {
-    console.log("Error pa")
-    await transactionSchema.updateOne({ _id:  idt}, {
-      $set: {
-        statusTransaction: "Denied"
-      }
-    })
     res.status(500).send(err.message);
   }
 }

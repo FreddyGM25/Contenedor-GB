@@ -6,7 +6,7 @@ const APP_SECRET = process.env.APP_SECRET
 
 const base = "https://api-m.sandbox.paypal.com";
 
-async function createOrder(amount) {
+async function createOrder(monto) {
   const accessToken = await generateAccessToken();
   const url = `${base}/v2/checkout/orders`;
   const response = await fetch(url, {
@@ -21,7 +21,7 @@ async function createOrder(amount) {
         {
           amount: {
             currency_code: "USD",
-            value: amount,
+            value: monto,
           },
         },
       ],
@@ -43,18 +43,6 @@ async function capturePayment(orderId) {
   });
 
   return handleResponse(response);
-}
-
-async function captureSuscription(orderId){
-  const accessToken = await generateAccessToken();
-  const url = `${base}/v1/billing/plans/${orderId}/activate`;
-  const response = await fetch(url, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
 }
 
 async function generateAccessToken() {
@@ -80,4 +68,4 @@ async function handleResponse(response) {
   throw new Error(errorMessage);
 }
 
-module.exports = { createOrder, capturePayment, captureSuscription }
+module.exports = {createOrder, capturePayment}
