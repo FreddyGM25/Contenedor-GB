@@ -6,9 +6,10 @@ const { addDays } = require('../../middleware/adddays')
 
 
 module.exports = async function (req, res) {
-  const user = await userSchema.findOne({username: req.body.username})
+  const user = await userSchema.findOne({ username: req.body.username })
   try {
-    ver = transactionSchema.findOne({email:user.email})
+    const ver = transactionSchema.findOne({ email: user.email })
+    if(ver) res.status(200).send({response: "Error", message: "Esta cuenta ya cuenta con una suscripcion"});
     const details = await paypal.detailsSubs(req.body.plan_id)
     const transaction = new transactionSchema({
       name: user.name,
@@ -19,16 +20,29 @@ module.exports = async function (req, res) {
       idsub: req.body.subscriptionID
     })
     await transaction.save()
-    const date = new Date(Date.now())
-    const newdate = addDays(365)
-        await userSchema.updateOne({ _id: user._id }, {
-            $set: {
-                isPro: true,
-                dateB: date,
-                dateF: newdate
-            }
-        })
-    return res.json(transaction);
+    if (details.product_id == "PRO1YEAR") {
+      const date = new Date(Date.now())
+      const newdate = addDays(365)
+      await userSchema.updateOne({ _id: user._id }, {
+        $set: {
+          isPro: true,
+          dateB: date,
+          dateF: newdate
+        }
+      })
+      return res.json(transaction);
+    } else if (details.product_id == "PRO1MONTH") {
+      const date = new Date(Date.now())
+      const newdate = addDays(30)
+      await userSchema.updateOne({ _id: user._id }, {
+        $set: {
+          isPro: true,
+          dateB: date,
+          dateF: newdate
+        }
+      })
+      return res.json(transaction);
+    }
   } catch (err) {
     res.status(500).send(err.message);
   }
