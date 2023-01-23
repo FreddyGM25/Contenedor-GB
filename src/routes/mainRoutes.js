@@ -20,7 +20,7 @@ router.get('/user/rewards', require('./user/verRewards'))
 router.get('/home/recently', require('./home/homer'))
 router.get('/admin/seem', require('./admin/verm'))
 router.get('/admin/info', require('./admin/verinfo'))
-router.post('/paysuspend', upload.none(), require('./transaction/SuspendSub'))
+router.post('/paysuspend', require('./transaction/SuspendSub'))
 
 
 

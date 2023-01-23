@@ -45,7 +45,7 @@ async function capturePayment(orderId) {
   return handleResponse(response);
 }
 
-async function detailsSubs(billing_plan_id){
+async function detailsSubs(billing_plan_id) {
   const accessToken = await generateAccessToken();
   const url = `${base}/v1/billing/plans/${billing_plan_id}`;
   const response = await fetch(url, {
@@ -58,9 +58,9 @@ async function detailsSubs(billing_plan_id){
   return handleResponse(response);
 }
 
-async function suspendSubs(id){
+async function suspendSubs(id) {
   const accessToken = await generateAccessToken();
-  const url = `${base}/v1/billing/subscriptions/${id}/suspend`;
+  const url = `${base}/v1/billing/subscriptions/${id}/cancel`;
   const response = await fetch(url, {
     method: "post",
     headers: {
@@ -68,10 +68,11 @@ async function suspendSubs(id){
       Authorization: `Bearer ${accessToken}`
     },
     body: JSON.stringify({
-      reason: 'Item out of stock'
+      'reason': 'No quiero seguir con la suscripcion'
+    })
   })
-  })
-  return handleResponse(response);
+
+  return response.status
 }
 
 
@@ -90,7 +91,7 @@ async function generateAccessToken() {
 }
 
 async function handleResponse(response) {
-  if (response.status === 200 || response.status === 201) {
+  if (response.status === 200 || response.status === 201 || response.status === 204) {
     return response.json();
   }
 
@@ -98,4 +99,4 @@ async function handleResponse(response) {
   throw new Error(errorMessage);
 }
 
-module.exports = {createOrder, capturePayment, detailsSubs, suspendSubs}
+module.exports = { createOrder, capturePayment, detailsSubs, suspendSubs }
