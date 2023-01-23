@@ -45,6 +45,36 @@ async function capturePayment(orderId) {
   return handleResponse(response);
 }
 
+async function detailsSubs(billing_plan_id){
+  const accessToken = await generateAccessToken();
+  const url = `${base}/v1/billing/plans/${billing_plan_id}`;
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    },
+  })
+  return handleResponse(response);
+}
+
+async function suspendSubs(id){
+  const accessToken = await generateAccessToken();
+  const url = `${base}/v1/billing/subscriptions/${id}/suspend`;
+  const response = await fetch(url, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
+    },
+    body: JSON.stringify({
+      reason: 'Item out of stock'
+  })
+  })
+  return handleResponse(response);
+}
+
+
 async function generateAccessToken() {
   const auth = Buffer.from(CLIENT_ID + ":" + APP_SECRET).toString("base64");
   const response = await fetch(`${base}/v1/oauth2/token`, {
@@ -68,4 +98,4 @@ async function handleResponse(response) {
   throw new Error(errorMessage);
 }
 
-module.exports = {createOrder, capturePayment}
+module.exports = {createOrder, capturePayment, detailsSubs, suspendSubs}

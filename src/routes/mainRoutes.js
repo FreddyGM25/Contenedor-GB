@@ -20,6 +20,7 @@ router.get('/user/rewards', require('./user/verRewards'))
 router.get('/home/recently', require('./home/homer'))
 router.get('/admin/seem', require('./admin/verm'))
 router.get('/admin/info', require('./admin/verinfo'))
+router.post('/paysuspend', upload.none(), require('./transaction/SuspendSub'))
 
 
 
@@ -43,10 +44,12 @@ router.post('/admin/boletin', upload.none(), require('./admin/boletin'))
 //Pagos PayPal
 router.post("/orders", upload.none(), require('./transaction/OrderPaypalD'))
 router.post("/orders/:orderID/capture", require('./transaction/OrderPaypalS'))
+router.post('/susorders', upload.none(), require('./transaction/SubPaypalS'))
+
 
 //Pagos Card
-router.post("/:username/pay", upload.none(), require('./transaction/OrderCardD'))
-router.post("/:username/success", upload.none(), require('./transaction/OrderCardS'))
+router.post("/payStripe", upload.none(), require('./transaction/OrderCardD'))
+router.post("/success", upload.none(), require('./transaction/OrderCardS'))
 
 //Regalos User
 router.post("/upload/rewards",  uploadFile('files').single('file'), require('./user/rewards'))

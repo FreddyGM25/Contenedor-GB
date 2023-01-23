@@ -18,7 +18,6 @@ module.exports = async function (req, res) {
       emailUser: user.email
     })
     await transaction.save()
-    console.log(user.money + transaction.monto)
     await userSchema.updateOne({ _id: user._id }, {
       $set: {
         money: user.money + transaction.monto

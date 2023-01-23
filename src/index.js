@@ -11,14 +11,16 @@ require("dotenv").config()
 const mainRoutes = require("./routes/mainRoutes")
 
 const app = express()
-app.use(cors({origins: '*'}));
+app.use(cors({
+  origin: ["http://localhost:4200", "http://localhost:8888"],
+}));
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/serverimg',express.static('src/images/serverimg'));
-app.use('/images',express.static('src/images/img'));
-app.use('/imagesprofile',express.static('src/images/imagesprofile'));
-app.use('/file',express.static('src/images/files'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/serverimg', express.static('src/images/serverimg'));
+app.use('/images', express.static('src/images/img'));
+app.use('/imagesprofile', express.static('src/images/imagesprofile'));
+app.use('/file', express.static('src/images/files'));
 
 const port = process.env.PORT || 9000
 

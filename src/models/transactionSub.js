@@ -12,27 +12,20 @@ const transactionSubSchema = mongoose.Schema({
         type:String,
         required: true
     },
-    monto:{
-        type:Number,
+    namep:{
+        type:String,
         required: true
-    },
-    ncard:{
-        type:Number,
-        required: true,
-    },
-    fechaexp:{
-        type:Date,
-        required:true
-    },
-    ncvv:{
-        type:Number,
-        required:true,
     },
     statusTransaction:{
         type:String
     },
-    typeSub:{
-        type:Number
+    idsub:{
+        type:String,
+        required:true
+    },
+    cancel:{
+        type:Boolean,
+        required:true
     }
     
 })

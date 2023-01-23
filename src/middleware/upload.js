@@ -10,12 +10,12 @@ function uploadFile(ruta) {
             cb(null, Date.now() + extension)
         },
         limits: {
-            fieldSize: 1000000,
+            fieldSize: 10000000,
         },
     })
-
     const upload = multer({ storage: storage })
     return upload
+
 }
 
 function imgUrl (filename){
