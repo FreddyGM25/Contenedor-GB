@@ -15,7 +15,6 @@ module.exports = async function (req, res) {
                 if (users[user].isAdmin == true) {
                     user++
                 } else {
-                    console.log(users[user].name)
                     const template = getTemplate(users[user].name, "", req.body.URL, req.body.texto, 3);
                     sendEmail(users[user].email, template, 3, req.body.asunto);
                 }

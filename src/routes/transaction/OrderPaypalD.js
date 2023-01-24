@@ -5,7 +5,6 @@ const paypal = require("../../middleware/paypal-api")
 
 
 module.exports = async function (req, res) {
-  console.log("paypal")
   try {
     const order = await paypal.createOrder(req.body.amount);
     res.json(order);

@@ -6,9 +6,9 @@ const { addDays } = require('../../middleware/adddays')
 
 
 module.exports = async function (req, res) {
-  const user = await userSchema.findOne({ username: req.body.username })
   try {
-    const ver = transactionSchema.findOne({ email: user.email })
+    const user = await userSchema.findOne({ username: req.body.username })
+    const ver = await transactionSchema.findOne({ email: user.email })
     if(ver) res.status(200).send({response: "Error", message: "Esta cuenta ya cuenta con una suscripcion"});
     const details = await paypal.detailsSubs(req.body.plan_id)
     const transaction = new transactionSchema({
@@ -17,7 +17,8 @@ module.exports = async function (req, res) {
       namep: details.product_id,
       statusTransaction: "Complete",
       isPaypal: true,
-      idsub: req.body.subscriptionID
+      idsub: req.body.subscriptionID,
+      cancel:false
     })
     await transaction.save()
     if (details.product_id == "PRO1YEAR") {
@@ -30,7 +31,7 @@ module.exports = async function (req, res) {
           dateF: newdate
         }
       })
-      return res.json(transaction);
+      return res.json(transaction)
     } else if (details.product_id == "PRO1MONTH") {
       const date = new Date(Date.now())
       const newdate = addDays(30)
@@ -41,9 +42,9 @@ module.exports = async function (req, res) {
           dateF: newdate
         }
       })
-      return res.json(transaction);
+      return res.json(transaction)
     }
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send(err.message)
   }
 }

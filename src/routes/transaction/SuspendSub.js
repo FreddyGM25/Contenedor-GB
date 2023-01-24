@@ -21,6 +21,8 @@ module.exports = async function (req, res) {
                 }
             })
             return res.status(200).send({ response: "Success", message: "Se cancelo correctamente" })
+        }else{
+            
         }
     } return res.status(200).send({ response: "Error", message: "Se requiere autenticacion" })
 }

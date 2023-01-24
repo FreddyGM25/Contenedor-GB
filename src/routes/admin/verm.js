@@ -10,7 +10,6 @@ module.exports = async function (req, res) {
         if (admin.isAdmin == true) {
             let result = await messageSchema.find()
             result = result.filter((valorActual, indiceActual, arreglo) => {
-                //Podríamos omitir el return y hacerlo en una línea, pero se vería menos legible
                 return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo.email) === JSON.stringify(valorActual.email)) === indiceActual
             });
             return res.status(200).send({ response: "Success", message: result })

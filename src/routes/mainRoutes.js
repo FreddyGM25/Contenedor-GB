@@ -20,8 +20,7 @@ router.get('/user/rewards', require('./user/verRewards'))
 router.get('/home/recently', require('./home/homer'))
 router.get('/admin/seem', require('./admin/verm'))
 router.get('/admin/info', require('./admin/verinfo'))
-router.post('/paysuspend', require('./transaction/SuspendSub'))
-
+router.get('/user/cancelsub', require('./transaction/getcancel'))
 
 
 //metodos POST
@@ -46,10 +45,15 @@ router.post("/orders", upload.none(), require('./transaction/OrderPaypalD'))
 router.post("/orders/:orderID/capture", require('./transaction/OrderPaypalS'))
 router.post('/susorders', upload.none(), require('./transaction/SubPaypalS'))
 
+// Cancelar Suscripcion
+router.post('/paysuspend', require('./transaction/SuspendSub'))
+
 
 //Pagos Card
-router.post("/payStripe", upload.none(), require('./transaction/OrderCardD'))
+router.post("/payStripe", require('./transaction/OrderCardD'))
 router.post("/success", upload.none(), require('./transaction/OrderCardS'))
+router.post("/subStripe", require('./transaction/SubCardD'))
+router.post("/subSuccess", upload.none(), require('./transaction/SubCardS'))
 
 //Regalos User
 router.post("/upload/rewards",  uploadFile('files').single('file'), require('./user/rewards'))
