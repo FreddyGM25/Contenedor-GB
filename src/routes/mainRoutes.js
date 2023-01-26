@@ -21,6 +21,7 @@ router.get('/home/recently', require('./home/homer'))
 router.get('/admin/seem', require('./admin/verm'))
 router.get('/admin/info', require('./admin/verinfo'))
 router.get('/user/cancelsub', require('./transaction/getcancel'))
+router.get('/admin/amountd', require('./admin/totaldonation'))
 
 
 //metodos POST

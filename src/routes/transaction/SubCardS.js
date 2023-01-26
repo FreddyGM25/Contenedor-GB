@@ -9,9 +9,14 @@ module.exports = async function (req, res) {
         const idt = req.body.idt
         const findUser = await transactionSchema.findOne({ _id: idt })
         if (findUser.statusTransaction == "Complete") return res.status(200).send({ response: "Error", message: "Donacion ya realizada" })
+        const session = await stripe.checkout.sessions.retrieve(
+            findUser.idsub
+          );
         await transactionSchema.updateOne({ _id: idt }, {
             $set: {
-                statusTransaction: "Complete"
+                idsub: session.subscription,
+                statusTransaction: "Complete",
+                
             }
         })
         const transaction = await transactionSchema.findById(idt)

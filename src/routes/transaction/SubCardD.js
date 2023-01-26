@@ -8,19 +8,6 @@ module.exports = async function (req, res) {
 
     try {
         const value = req.body.plan_id
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    price: value,
-                    quantity: 1,
-                },
-            ],
-            mode: 'subscription',
-            success_url: `${process.env.YOUR_DOMAIN}/profile`,
-            cancel_url: `${process.env.YOUR_DOMAIN}/cancel.html`,
-        });
-        res.json({ url: session.url })
         const user = await userSchema.findOne({ username: req.body.username })
         const plan = await stripe.plans.retrieve(
             value
@@ -38,11 +25,28 @@ module.exports = async function (req, res) {
             namep: name,
             statusTransaction: "Pending",
             isPaypal: false,
-            idsub: session.id,
-            cancel: false
+            idsub: " ",
+            cancel: true
         })
         const result = await transaction.save()
-
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: [
+                {
+                    price: value,
+                    quantity: 1,
+                },
+            ],
+            mode: 'subscription',
+            success_url: `${process.env.YOUR_DOMAIN}/profile?idt=${result._id}`,
+            cancel_url: `${process.env.YOUR_DOMAIN}/cancel.html`,
+        });
+        await transactionSchema.updateOne({ _id: result._id }, {
+            $set: {
+              idsub: session.id
+            }
+          })
+        res.json({ url: session.url })
     } catch (err) {
         res.status(500).send(err.message)
     }
