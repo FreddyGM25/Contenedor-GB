@@ -7,7 +7,7 @@ const upload = multer()
 //metodos GET
 router.get('/:username', require('./message/verm'))
 router.get('/admin/seeu', require('./admin/veru'))
-router.get('/admin/seer', require('./admin/verr'))
+router.get('/admin/seer', require('./admin/verR'))
 router.get('/admin/seepro', require('./admin/verPRO'))
 router.get('/admin/seet', require('./admin/vert'))
 router.get('/admin/oneUT/:email', upload.none(),require('./admin/oneUT'))
