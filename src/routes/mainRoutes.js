@@ -48,8 +48,7 @@ router.post("/orders/:orderID/capture", require('./transaction/OrderPaypalS'))
 router.post('/susorders', upload.none(), require('./transaction/SubPaypalS'))
 
 // Cancelar Suscripcion
-router.post('/paysuspend', require('./transaction/SuspendSub'))
-
+router.get('/paysuspend', require('./transaction/SuspendSub'))
 
 //Pagos Card
 router.post("/payStripe", require('./transaction/OrderCardD'))

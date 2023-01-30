@@ -38,7 +38,7 @@ module.exports = async function (req, res) {
                 },
             ],
             mode: 'subscription',
-            success_url: `${process.env.YOUR_DOMAIN}/profile?idt=${result._id}`,
+            success_url: `${process.env.YOUR_DOMAIN}/perfil?idt=${result._id}`,
             cancel_url: `${process.env.YOUR_DOMAIN}/cancel.html`,
         });
         await transactionSchema.updateOne({ _id: result._id }, {

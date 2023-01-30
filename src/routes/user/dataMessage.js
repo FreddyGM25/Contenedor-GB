@@ -5,7 +5,7 @@ async function SeeM(id) {
 
         const message = await messageSchema.find({emailUser:id})
         if(message == null) return ""
-        if(!message.isPro){
+        if(message.isPro == false){
                const array = message.slice(0,10)
                return array
         }
