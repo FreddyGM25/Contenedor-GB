@@ -7,7 +7,7 @@ module.exports = async function (req, res) {
         const user = await userSchema.findOne({username:req.params.username.toLowerCase()})
         if(user == null) return res.status(501).send({ response: "Error", error: "El nombre de usuario no existe"})
         const message = await SeeM(user.email)
-        return res.status(200).send({response: "Error", user: user, message: message })
+        return res.status(200).send({response: "Success", user: user, message: message })
     }else{
         return res.status(200).send({response: "Error", error: "Error en el nombre de usuario"})
     }
