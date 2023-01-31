@@ -9,8 +9,8 @@ module.exports = async function (req, res) {
     if (tokenver) {
         const user = await userSchema.findById(tokenver._id)
         const transaction = await transactionSchema.findOne({email: user.email, cancel:false})
-        if(transaction == null) return res.status(200).send({response: "Success", cancel:true })
-        return res.status(200).send({response: "Success", cancel: false })
+        if(transaction == null) return res.status(200).send({response: "Success", cancel:transaction.cancel })
+        return res.status(200).send({response: "Success", cancel:transaction.cancel })
     }else{
         return res.status(200).send({response: "Error", error: "Se requiere autenticacion"})
     }
