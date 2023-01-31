@@ -3,10 +3,9 @@ const userSchema = require('../../models/user')
 require("dotenv").config()
 const paypal = require("../../middleware/paypal-api")
 const { TokenVerify } = require('../../middleware/autentication')
-
+const stripe = require('stripe')(process.env.KEYSTRIPE)
 
 module.exports = async function (req, res) {
-    console.log("Entro")
     const token = req.headers.authorization.split(' ').pop()
     const tokenver = await TokenVerify(token)
     if (tokenver) {
@@ -22,7 +21,13 @@ module.exports = async function (req, res) {
             })
             return res.status(200).send({ response: "Success", message: "Se cancelo correctamente" })
         }else{
-            
+            await stripe.subscriptions.del(transaction.idsub)
+            await transactionSchema.updateOne({ _id: transaction._id }, {
+                $set: {
+                    cancel: true
+                }
+            })
+            return res.status(200).send({ response: "Success", message: "Se cancelo correctamente" })
         }
     } return res.status(200).send({ response: "Error", message: "Se requiere autenticacion" })
 }

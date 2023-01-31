@@ -26,7 +26,7 @@ module.exports = async function (req, res) {
             statusTransaction: "Pending",
             isPaypal: false,
             idsub: " ",
-            cancel: true
+            cancel: false
         })
         const result = await transaction.save()
         const session = await stripe.checkout.sessions.create({
@@ -38,8 +38,8 @@ module.exports = async function (req, res) {
                 },
             ],
             mode: 'subscription',
-            success_url: `${process.env.YOUR_DOMAIN}/perfil?idt=${result._id}`,
-            cancel_url: `${process.env.YOUR_DOMAIN}/cancel.html`,
+            success_url: `${process.env.YOUR_DOMAIN}/loading?idt=${result._id}`,
+            cancel_url: `${process.env.YOUR_DOMAIN}`,
         });
         await transactionSchema.updateOne({ _id: result._id }, {
             $set: {

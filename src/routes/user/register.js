@@ -2,8 +2,11 @@ const bcrypt = require('bcryptjs')
 const userSchema = require('../../models/user')
 const { TokenAssign } = require('../../middleware/autentication')
 const { getTemplate, sendEmail } = require('../../middleware/email')
+const { captcha } = require('../../middleware/autentication')
 
 module.exports = async function (req, res) {
+    const verify = await captcha(req)
+    if(verify == false) return res.status(200).send({ response: "Error", message: "Error en verificacion captcha" })
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashPassword;

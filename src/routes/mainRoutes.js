@@ -48,13 +48,13 @@ router.post("/orders/:orderID/capture", require('./transaction/OrderPaypalS'))
 router.post('/susorders', upload.none(), require('./transaction/SubPaypalS'))
 
 // Cancelar Suscripcion
-router.get('/paysuspend', require('./transaction/SuspendSub'))
+router.get('/user/paysuspend', require('./transaction/SuspendSub'))
 
 //Pagos Card
 router.post("/payStripe", require('./transaction/OrderCardD'))
 router.post("/success", upload.none(), require('./transaction/OrderCardS'))
 router.post("/subStripe", require('./transaction/SubCardD'))
-router.post("/subSuccess", upload.none(), require('./transaction/SubCardS'))
+router.put("/subSuccess", upload.none(), require('./transaction/SubCardS'))
 
 //Regalos User
 router.post("/upload/rewards",  uploadFile('files').single('file'), require('./user/rewards'))

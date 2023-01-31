@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken')
+const fetch = require('isomorphic-fetch')
+const { trusted } = require('mongoose')
 
 //Generar token 
 async function TokenAssign(user) {
@@ -40,4 +42,30 @@ async function TokenRemove(token) {
     })
 }
 
-module.exports = { TokenAssign, TokenVerify, AuthCheck, TokenRemove }
+async function captcha(req) {
+    if (req.body.token === undefined || req.body.token === '' || req.body.token === null) {
+        console.log("Entre aqui")
+        return false
+    }
+    const secretKey = process.env.CAPTCHA;
+
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.token}`
+    
+    fetch(url, {
+        method: 'post',
+    })
+        .then((response) => response.json())
+        .then((google_response) => {
+            if (google_response.success == true) {
+                return true
+            } else {
+                return false
+            }
+        })
+        .catch((error) => {
+            return res.json({ error })
+        })
+
+}
+
+module.exports = { TokenAssign, TokenVerify, AuthCheck, TokenRemove, captcha }

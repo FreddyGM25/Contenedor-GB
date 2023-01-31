@@ -8,7 +8,7 @@ const { addDays } = require('../../middleware/adddays')
 module.exports = async function (req, res) {
   try {
     const user = await userSchema.findOne({ username: req.body.username })
-    const ver = await transactionSchema.findOne({ email: user.email })
+    const ver = await transactionSchema.findOne({ email: user.email , cancel:false})
     if(ver) res.status(200).send({response: "Error", message: "Esta cuenta ya cuenta con una suscripcion"});
     const details = await paypal.detailsSubs(req.body.plan_id)
     const transaction = new transactionSchema({
