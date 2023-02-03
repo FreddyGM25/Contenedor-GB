@@ -12,7 +12,7 @@ const mainRoutes = require("./routes/mainRoutes")
 
 const app = express()
 app.use(cors({
-  origin: ["http://localhost:4200", "http://localhost:8888","https://gratitud.link"],
+  origin: '*',
 }));
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -22,7 +22,7 @@ app.use('/images', express.static('src/images/img'));
 app.use('/imagesprofile', express.static('src/images/imagesprofile'));
 app.use('/file', express.static('src/images/files'));
 
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 9001
 
 //middlewares
 app.use(express.json())

@@ -33,7 +33,7 @@ module.exports = async function (req, res) {
                 }
             })
             return res.json(transaction)
-        } else if (transaction == "PRO1MONTH") {
+        } else if (transaction.namep == "PRO1MONTH") {
             const date = new Date(Date.now())
             const newdate = addDays(30)
             await userSchema.updateOne({ _id: user._id }, {
