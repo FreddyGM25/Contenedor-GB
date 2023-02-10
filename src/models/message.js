@@ -38,6 +38,12 @@ const messageSchema = mongoose.Schema({
     },
     monto:{
         type:Number
+    },
+    visible:{
+        type:Boolean
+    },
+    like:{
+        type:Boolean
     }
     
 })

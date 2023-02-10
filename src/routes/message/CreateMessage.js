@@ -23,7 +23,9 @@ module.exports = async function (req, res) {
                     filePath: `${process.env.URLB}/images/${req.file.filename}`,
                     fileType: req.file.mimetype,
                     fileSize: req.file.size
-                }
+                },
+                visible:false,
+                like:false
             })
             const result = await message.save()
             return res.status(200).send({ response: "Success", message: "Success" })
@@ -33,7 +35,9 @@ module.exports = async function (req, res) {
                 name: req.body.name,
                 title: req.body.title,
                 description: req.body.description,
-                email: req.body.email
+                email: req.body.email,
+                visible:false,
+                like:false
             })
             await message.save()
             return res.status(200).send({ response: "Success", message: "Success" })
@@ -52,7 +56,9 @@ module.exports = async function (req, res) {
                         filePath: `${process.env.URLB}/images/${req.file.filename}`,
                         fileType: req.file.mimetype,
                         fileSize: req.file.size
-                    }
+                    },
+                    visible:false,
+                    like:false
                 }
             })
             return res.status(200).send({ response: "Success", message: "Success" })
@@ -63,7 +69,9 @@ module.exports = async function (req, res) {
                     name: req.body.name,
                     title: req.body.title,
                     description: req.body.description,
-                    email: req.body.email
+                    email: req.body.email,
+                    visible:false,
+                    like:false
                 }
             })
             return res.status(200).send({ response: "Success", message: "Success" })

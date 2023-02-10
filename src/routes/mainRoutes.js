@@ -71,7 +71,12 @@ router.put('/admin/pay', upload.none(),require('./admin/pay'))
 router.put('/admin/price', upload.none(),require('./admin/infoprice'))
 router.put('/admin/info', upload.none(),require('./admin/info'))
 
+router.put('/user/seemessage/:id', require('./message/SeeMessage'))
+router.put('/user/like/:id', require('./message/like'))
+
+
 //metodos DELETE
 router.delete('/admin/deleteu/:email', upload.none(), require('./admin/deleteu'))
+router.delete('/user/delmessage/:id', require('./message/DelMessage'))
 
 module.exports = router

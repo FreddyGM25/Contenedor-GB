@@ -25,6 +25,9 @@ const transactionSchema = mongoose.Schema({
     },
     createdAt:{
         type: Date
+    },
+    idp:{
+        type:String
     }
     
 })
