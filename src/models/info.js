@@ -20,7 +20,6 @@ const infoSchema = mongoose.Schema({
     comision: {
         type: String
     }
-
 })
 
 module.exports = mongoose.model('Info', infoSchema)

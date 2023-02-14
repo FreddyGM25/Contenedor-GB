@@ -19,8 +19,24 @@ const HomeSchema = mongoose.Schema({
     },
     texto3: {
         type: String
+    },
+    image: {
+        fileName: {
+            type: String,
+        },
+        filePath: {
+            type: String,
+        },
+        fileType: {
+            type: String,
+        },
+        fileSize: {
+            type: String,
+        }
+    },
+    URL:{
+        type:String
     }
-
 })
 
-module.exports = mongoose.model('Home', infoSchema)
+module.exports = mongoose.model('Home', HomeSchema)

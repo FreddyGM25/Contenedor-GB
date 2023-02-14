@@ -8,7 +8,7 @@ module.exports = async function (req, res) {
     let numUser = []
     let cont = 0
     let contu = user.length - 1
-    if (user.length < 8) {
+    if (user.length <= 10) {
         for (var i = 0; i < user.length; i++) {
             const num = await messageSchema.find({emailUser: user[contu].email})
             if (user[contu].isAdmin) {
@@ -28,7 +28,8 @@ module.exports = async function (req, res) {
             cont++
         }
     } else {
-        for (var i = 0; i < 8; i++) {
+        console.log(user.length)
+        for (var i = 0; i < 10; i++) {
             let num = await messageSchema.find({emailUser: user[contu].email})
             if (user[contu].isAdmin) {
                 contu--

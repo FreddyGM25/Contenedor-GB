@@ -23,6 +23,7 @@ router.get('/admin/info', require('./admin/verinfo'))
 router.get('/user/cancelsub', require('./transaction/getcancel'))
 router.get('/admin/amountd', require('./admin/totaldonation'))
 router.get('/user/datef', require('./user/getdate'))
+router.get('/home/info', require('./home/seeinfo'))
 
 
 //metodos POST
@@ -70,6 +71,8 @@ router.put('/user/editp', uploadFile('imagesprofile').single('imgpro'), require(
 router.put('/admin/pay', upload.none(),require('./admin/pay'))
 router.put('/admin/price', upload.none(),require('./admin/infoprice'))
 router.put('/admin/info', upload.none(),require('./admin/info'))
+router.put('/admin/home', upload.none(),require('./admin/infohome'))
+router.put('/admin/homeimg', uploadFile('home').single('image'),require('./admin/infohomeimg'))
 
 router.put('/user/seemessage/:id', require('./message/SeeMessage'))
 router.put('/user/like/:id', require('./message/like'))

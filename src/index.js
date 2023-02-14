@@ -21,6 +21,7 @@ app.use('/serverimg', express.static('src/images/serverimg'));
 app.use('/images', express.static('src/images/img'));
 app.use('/imagesprofile', express.static('src/images/imagesprofile'));
 app.use('/file', express.static('src/images/files'));
+app.use('/homeimg', express.static('src/images/home'));
 
 const port = process.env.PORT || 9001
 
