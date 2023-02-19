@@ -10,11 +10,11 @@ module.exports = async function (req, res) {
     let contu = user.length - 1
     if (user.length <= 10) {
         for (var i = 0; i < user.length; i++) {
-            const num = await messageSchema.find({emailUser: user[contu].email})
             if (user[contu].isAdmin) {
                 contu--
                 i++
             }
+            const num = await messageSchema.find({emailUser: user[contu].email})
             arrayUser[cont] = new userSchema({
                 name: user[contu].name,
                 titulo: user[contu].titulo,
@@ -28,12 +28,11 @@ module.exports = async function (req, res) {
             cont++
         }
     } else {
-        console.log(user.length)
         for (var i = 0; i < 10; i++) {
-            let num = await messageSchema.find({emailUser: user[contu].email})
             if (user[contu].isAdmin) {
                 contu--
             }
+            let num = await messageSchema.find({emailUser: user[contu].email})
             arrayUser[cont] = new userSchema({
                 name: user[contu].name,
                 titulo: user[contu].titulo,
