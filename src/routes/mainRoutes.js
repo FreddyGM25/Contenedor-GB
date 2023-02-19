@@ -74,7 +74,7 @@ router.put('/admin/info', upload.none(),require('./admin/info'))
 router.put('/admin/home', upload.none(),require('./admin/infohome'))
 router.put('/admin/homeimg', uploadFile('home').single('image'),require('./admin/infohomeimg'))
 
-router.put('/user/seemessage/:id', require('./message/SeeMessage'))
+router.put('/user/seemessage/:id', upload.none(),require('./message/SeeMessage'))
 router.put('/user/like/:id', require('./message/like'))
 
 
